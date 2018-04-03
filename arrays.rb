@@ -1,3 +1,5 @@
+
+#arrays
 #there are two ways to create an array 
 long_way = Array.new
 short_way = []
@@ -44,7 +46,7 @@ fruits << "cranberry"
 #returns true
 
 #LIFO: pushing/poping
-#difference between shovel (#<<) and #push is that push accepts multiple 
+#difference between shovel (#<<) and #push is that push accepts multiple
 #arguments and << only accepts a single argument
 nums = []
 nums << 1
