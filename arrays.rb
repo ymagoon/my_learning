@@ -172,6 +172,11 @@ end
 
 array.reverse_each { |i| puts i } # accesses an array in reverse
 
-array.select { |i| i.even? } # => [6, 4] returns an array that meets the condition in the block
-array.map { |i| i * 2 }      # => [30, 12, 10, 8, 2] returns a new array with the block applied to each value
-array.reject { |i| i < 5 }   # => [15, 6, 5] reject values that do not qualify for a condition
+array.select { |i| i.even? }       # => [6, 4] returns an array that meets the condition in the block
+array.map { |i| i * 2 }            # => [30, 12, 10, 8, 2] returns a new array with the block applied to each value
+array.reject { |i| i < 5 }         # => [15, 6, 5] reject values that do not qualify for a condition
+
+# The reduce function (alias is inject) passes the object back through each iteration. This is used to
+# reduce an array to a single value
+array.reduce { |sum, i| sum += i } # => 26 through each iteration, the sum is passed into the block
+array.reduce(:+)                   # => 26 shorthand approach calling the #+ method
