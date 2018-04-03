@@ -141,6 +141,9 @@ array.uniq # => [1, 4, 5, 6, 15] the original array is not modified. The uniq me
 # arrays can be shuffled into a random order
 array.shuffle # => [4, 5, 1, 15, 6] returns a randomly shuffled array. It does not modify the original array
 
+# arrays can be reversed very easily
+array.reverse # => [6, 15, 1, 5, 4]
+
 =begin
 Sorting is a very complex topic, so it will be included here in brevity. Advanced sorting methods will be
 covered in their own sections. For the array class you can use the sort method to sort arrays. The sort
