@@ -78,12 +78,15 @@ and will return the number of matches in an Enumerable: There’s a performance 
 the size of the enumerable the count method will traverse it, which is not particularly fast (especially for huge collections)
 =end
 
-array.size # => 5
-array.count # => 5
-arr.count(&:even?) # counts even elements
+array.size                                            # => 5
+array.count                                           # => 5
+arr.count(&:even?)                                    # counts even elements
 
-array.empty? # an array is empty [] if there are no values in it
-array.include?(5) # => true
+array.empty?                                          # an array is empty [] if there are no values in it
+array.include?(5)                                     # => true
+array.max                                             # => 5
+array.max(2)                                          # => [5,4] return the two greatest values in descending order
+["zen", "zazen", "liberation"].max_by { |i| i.length} # => "liberation"
 
 =begin
 Arrays can be modified in many different ways. They can be added, subtracted, multiplied,
