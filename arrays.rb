@@ -1,192 +1,177 @@
-#test 
-long_way = Array.new
-short_way = []
+=begin
+There are two main ways to create an array in Ruby. The first is by an array literal.
+That is, setting a variable to []. The array can be left empty or populated when it is
+instantiated. The second way is by using the Array class.
+=end
 
-#setting values to the arrays is simple
-long_way = ["this", "is", "the", "long", "method", "to", "create", "an", "array"]
-short_way = [1,2,3,4,5]
+array = []        # array literal
+array = Array.new # array object
 
-#accessing arrays can be done based on the index, which starts with 0
-#puts short_way[0]
 
-#a range of values from an array can also be returned.
-#two dots (..) is inclusive of the last value, and three dots (...) is exclusive
+#Both of the above methods will create an empty array []. Array.new supports paramaters as well as passing in blocks.
 
-#puts short_way[2..4]
-#puts short_way[2...4]
+array = Array.new(3) => [nil, nil, nil]        # passing in 3 creates an array with 3 indicies of nil value
+array = Array.new(3, "-") => ["-", "-", "-"]   # passing in 3 and "-" creats an array with "-" repeated 3 times
+array = Array.new(3){ |i| (i+1).to_s }         # passing in a block applies the block to each element of the array
 
-#you can also use a negative number (-1,-2, etc) where -1 is the last element
-#of an array, -2 is the second to last number, etc.
-#puts short_way[0..-2]
+#Arrays literals can be populated like this. The following shows two examples using strings and numbers
 
-#if you want to access all the elements of an array, instead of using a for/while
-#loop, you can use an iterator
+array = ["this", "is", "the", "long", "method", "to", "create", "an", "array"] # strings
+array = [1,2,3,4,5] #integers
+# There is a shorthand for creating an array of strings by using the %w formatter %w[], %w(), %w{} (same thing)
+array = %w[this is a way to create an array using space delimiters] # => ["1", "2", "3"] arrays with whitespace delimited
 
-#long_way.each do |long_way|
-#  puts "I like #{long_way}"
-#end
+# You can also use ranges to create a range of strings or integers in an array
+array = ('1'..'5').to_a # => ['1','2','3','4','5']
+array = (1..5).to_a  # => [1, 2, 3, 4, 5]
 
-# << is called the shovel operator. Essentially the same as Array.push
-fruits = []
-fruits << "apple"
-fruits << "cranberry"
+=begin
+Accessing data from arrays can be done in a variety of ways. You can access with a value associated with the index
+you cant to access. You can also access a substring of values by supplying a range.
 
-#puts fruits
+The last index of an array can be accessed using the index -1.
+=end
 
-#arrays can be concatenated
-#puts long_way + short_way
+array[0] # accessing the first element of an array
 
-#there are two ways to get an array's size
-#puts [1,2,3].count
-#puts [1,2,3].length
-#returns 3
-#puts [].empty?
-#returns true
+array[2..3] # => [3, 4] returns an array starting at position 2 ending at position 3 Inclusive
+array[2...4] # => [3, 4] returns an array starting at position 2 ending at position 4 Exclusive
 
-#LIFO: pushing/poping
-#difference between shovel (#<<) and #push is that push accepts multiple
-#arguments and << only accepts a single argument
-nums = []
-nums << 1
-nums << 2
-nums << 3
-# nums << 3 + 2
-nums << (nums.pop) + (nums.pop)
-# nums << 1 + 5
-nums << (nums.pop) + (nums.pop)
-#answer is 6
-#puts nums
+array[2..-2] # => [3, 4] returns an array ending at the second to last position (-1 is the last position)
 
-#arrays can be used as a queue or FIFO using #push and #delete_at
-nums = [1,2,3]
-nums.delete_at(0)
-nums.push(4)
-#puts nums
+# Another syntax to the ranges above is using the slice method
+array.slice(0)     # => 1
+array.slice(0..2)  # => [1, 2, 3]
+array.slice(1..-2) # => [2, 3, 4]
 
-#shift and unshift are opposite push/pop. They add and remove elements from
-#the beginning of an array
-nums = [1,2,3]
-nums.shift
-#puts nums
-nums.unshift(5)
-#puts nums
+# By using the index method, we can return the index where the first occurence of a value exists
+array.index(3) # => 2 the value of 3 is located at index 2
+array.index { |x| x == num * 2 } # => 3 if num == 2, passing in a block finds the index where x == 4
 
-#arrays can be joined into a string using the join method
-#puts "things I like include: #{long_way.join(" ")}!"
+# There are two methods you can call on an array without supplying a position
+array.first # => 0
+array.last # => 5
 
-#finding elements in an array is simple with the include? method
-#puts long_way.include?("is")
+# If you try an access an element that does not exist, it will not work
+array[10] # => nil
 
-#the index method returns the position of the first occurence of an item in an array
-#puts long_way.index("is")
+# If the position doesn't exist, you can contol what is returned by using fetch
+array.fetch(10,"that index does not exist") # => "that index does not exist"
 
-#sorting an array can be done with the sort method
-#notice how sort doesn't effect the actual contents of the array, it creates a new
-#instance of the object. Using the sort! method actually changes the object
-#sort is a safe method, sort! is an unsafe method
-sort_me = [3,1,5,6,3]
-#puts sort_me.sort
-#puts sort_me
+# There are two more methods that do not require identifying positions to return values
+array.take(3) # => [1, 2, 3] returns the first 3 values
+array.drop(2) # => [3, 4, 5] returns an array without the first two elements
 
-sort_me.sort!
-#puts sort_me
+=begin
+Arrays have certain methods that define an array. You can find the length/size of an array,
+and you can determine whether an array contains a value.
 
-#arrays can be shuffled into a random order
-#shuffle also has safe and unsafe methods
-#puts sort_me.shuffle
-#sort_me.shuffle!
+length is a method that’s not part of Enumerable – it’s part of a concrete class (like String or Array)
+and it runs very fast.
 
-#accessing the first and last elements of an array is simple
-#puts sort_me.first
-#puts sort_me.last
+size is an alias, which does the same thing. Use length for strings, since objects like arrays, hashes, stacks etc
+don't really have a length. Use sizefor these collections.
+Whether you should use length or size is mostly a matter of personal preference.
 
-#random sampling of an array can be dome with the sample method
-#each element of the array has the same probability of being chosen
-#puts sort_me.sample
+count, on the other hand, is a totally different beast. It’s usually meant to be used with a block or an argument
+and will return the number of matches in an Enumerable: There’s a performance implication with this, though – to calculate
+the size of the enumerable the count method will traverse it, which is not particularly fast (especially for huge collections)
+=end
 
-#---------------------------------------------
+array.size # => 5
+array.count # => 5
+arr.count(&:even?) # counts even elements
 
-#accessing an array is simple, it can be done by position like below
-new_arr = [1,2,3,4,5]
-puts new_arr[0]
-puts new_arr[6].inspect #check out error that is thrown
+array.empty? # an array is empty [] if there are no values in it
+array.include?(5) # => true
 
-#if you want to control the error that is being thrown, you can use fetch
-#puts new_arr.fetch(6).inspect #this throws an error
-puts new_arr.fetch(6,"shit, out of bounds")
+=begin
+Arrays can be modified in many different ways. They can be added, subtracted, multiplied,
+values can be added, subtracted, inserted and an array can actually be cleared. Here's a sample
+of all of the ways an array can be modified.
 
-#special methods to return items without directly identifying the position
-puts new_arr.first
-puts new_arr.last
-puts new_arr.take(3).inspect #from 0 to argument
+<shift/unshift>[ 1  2  3  4  5]<push/pop>
 
-#drop is the opposite of take, it ignores from 0 to argument, and returns the rest
-puts new_arr.drop(2).inspect
+Four methods (shown above) are used to add and remove elements from an array from the beginning or end
+=end
 
-#info about an array can be found with a number of functions
-puts new_arr.length #size or count work as well
-puts new_arr.empty?
-puts new_arr.include?(5)
+array.push(6)    # => [1, 2, 3, 4, 5, 6] adds an element to the end of the array
+array << 7       # => [1, 2, 3, 4, 5, 6, 7] you can also use the shovel operator to add elements
+array << 8 << 9  # => [1, 2, 3, 4, 5, 6, 7, 8, 9] elements can be shoveled several at a time
 
-#adding and removing items from an array can be done with several functions
-puts (new_arr << 6).inspect #adds to end
-puts new_arr.push(7).inspect #adds to end
-puts new_arr.unshift(0).inspect #adds to beginning
+array.unshift(0) # => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] adds elements to the beginning
+array.pop        # => [0, 1, 2, 3, 4, 5, 6, 7, 8] removes the last element
+array.shift      # => [1, 2, 3, 4, 5, 6, 7, 8] removes the first element
 
-puts new_arr.insert(3, "banana").inspect
-puts new_arr.pop #removes the last element and returns it
-puts new_arr.inspect
-puts new_arr.shift.inspect #removes first element and returns it
-puts new_arr.inspect
-puts new_arr.delete_at(2).inspect #deletes item at specific index and returns it
-puts new_arr.inspect
+array << array.pop + array.pop # => [1, 2, 3, 4, 5, 6, 15] the shovel operator can accept multiple parameters
 
-puts new_arr.push(6).delete(6) #adding a second 6 to the end of the array, and delete all 6's from the array
-puts new_arr.inspect
+=begin
+Using pushing/popping we can create a stack or a queue data structure using arrays.
+LIFO (last in first out) pushes items onto the stack, then removes then
+array.push(value)
+array.push(value)
+array.pop
 
-#a really nifty method to use to remove duplicates from an array is uniq
+FILO (first in last out) pushes items into a queue and removes them
+array.push(value)
+array.push(value)
+array.shift
+=end
 
-new_arr << 6 << 6
-puts new_arr.uniq.inspect #removes the second 6
+# In addition to using shift and pop to remove elements from the ends of an array, you can use
+#delete and delete_at to remove from within the array
 
-new_arr = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth']
+new_arr.delete_at(2) # => 3 leaving array = [1, 2, 4, 5, 6, 15] returns value deleted
 
-#looping over all elements in an array
-new_arr.each { |word| puts word }
-#loop over all elements backwards
-new_arr.reverse_each { |word| puts word }
+array << 2 # => [1, 2, 4, 5, 6, 15, 2]
+array.delete(2) # => 2 leaving array = [1, 4, 5, 6, 15] returns value deleted or nil. Removes all instances of value.
 
-#map can be used to create a new array based on the original array
-#for instance, we can apply a block of code to each element of an array and return a new array
-#removing all vowels from all words
-puts new_arr.map { |word| word.gsub(/[aeiou]/,'') }.join(' ')
+# if an array contains duplicate values then the #uniq method can be used to remove any element after the first
+array << 4 # => [1, 4, 5, 6, 15, 4]
+array.uniq # => [1, 4, 5, 6, 15] the original array is not modified. The uniq method returns a unique array.
 
-#similar to map, we can SELECT a set of values in an array based on a block condition
+# different operators can be applied to two arrays to return a combination of them
+[1,1,3,5] & [3,2,1] # => [1, 3] returns an array containing unique elements common to the two arrays
+[1,1,3,5] - [3,2,1] # => [5] returns an array containing elements in the first array that don't exist in the second
+[3,2,1] - [1,1,3,5] # => [2]
 
-new_arr = [1,2,3,4,5,6]
+[1,2,3] + [4,5,6,7] # => [1, 2, 3, 4, 5, 6, 7] concatenates an array, keeping the order
+[1,2,3] * 2         # =? [1, 2, 3, 1, 2, 3] repeats the array n number of times where n = 2 in this example
 
-puts new_arr.select { |num| num > 2 }.inspect #returns an array of all values greater than 2
-#alternatively, we can use the opposite of select to reject values that don't qualify for a condition
-puts new_arr.reject { |num| num < 3 }.inspect
+# arrays can be shuffled into a random order
+array.shuffle # => [4, 5, 1, 15, 6] returns a randomly shuffled array. It does not modify the original array
 
-puts ([1,1,3,5] & [3,2,1]).inspect #returns an array containing unique elements common to the two arrays
-puts ([1,1,3,5] - [3,2,1]).inspect #returns an array containing elements in the first array that don't exist in the second
-puts ([3,2,1] - [1,1,3,5] ).inspect
+=begin
+Sorting is a very complex topic, so it will be included here in brevity. Advanced sorting methods will be
+covered in their own sections. For the array class you can use the sort method to sort arrays. The sort
+method can accept a block which allows you to customize how the array is sorted.
 
-puts ([1,2,3] + [4,5,6]).inspect #concatenates an array, keeping the order
-puts ([1,2,3] * 3).inspect #repeats the array n number of times where n = 3 in this example
+The block must implement a comparison between two values (a, b).
+When -1 is returned a < b, 0 is returned a == b, and when 1 is returned b > a
+=end
 
-arr = [1,2,3,4,5,6]
-puts arr[3]
-puts arr[1,2].inspect
-puts arr[1..2].inspect
-puts arr.slice(1,2).inspect
-puts arr.slice(1..2).inspect
-puts arr.slice(1..-1).inspect #-1 index refers to the last element
+array.sort                    # => [1, 4, 5, 6, 15] returns a sorted array. Does not alter the original array.
+array.sort { |x,y| y <=> x }  #=> [15, 6, 5, 4, 1]
 
-arr = [1,2,3,4,5,6]
+# Arrays can be joined together into a string
+array.join(' ') # => "15 6 5 4 1"
 
-num = 2
-puts arr.index { |x| x == num*2 } #finds index of value 4 (2 * 2)
+# If you need a random sampling of data, you can chose a value from an array with equal probability
+array.sample # => 5
 
-puts [1,2].hash == [2,1].hash
+=begin
+Accessing all of the elements of an array can be done by traversing the array. There are a variety of
+methods that allow us to traverse arrays that each have a different function.
+=end
+
+array.each { |i| puts i } # prints each element in the array. Anything can be supplied in the block
+
+array.each do |i| # the same as above, except the block is formatted differently
+  puts i
+end
+
+array.reverse_each { |i| puts i } # accesses an array in reverse
+
+array.select { |i| i.even? } # => [6, 4] returns an array that meets the condition in the block
+array.map { |i| i * 2 }      # => [30, 12, 10, 8, 2] returns a new array with the block applied to each value
+array.reject { |i| i < 5 }   # => [15, 6, 5] reject values that do not qualify for a condition
