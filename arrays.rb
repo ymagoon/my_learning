@@ -1,3 +1,4 @@
+#test 
 long_way = Array.new
 short_way = []
 
