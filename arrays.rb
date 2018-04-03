@@ -1,6 +1,3 @@
-
-#arrays summary:
-#there are two ways to create an array
 long_way = Array.new
 short_way = []
 
