@@ -18,15 +18,23 @@
 #stomach_contents = '"Pigs" is double quoted, and this is a backslash \" '
 #puts stomach_contents
 
-#it's very common to build strings using string interpolation. 
+#it's very common to build strings using string interpolation.
 # code inside #{} is executed, and the returned value is inserted into the string
 #worst_days = "Monday"
 #day = 1
 #puts "#{worst_days}s are the worst because it's the #{day}st day of the week!"
 
 #the following lines are going to contain tons of examples of using functions on strings!
-
 #string * integer outputs the string integer number of times
+
+
+#todo added
+x = %q{This is a test
+of the multi
+line capabilities}
+
+
+
 puts "Ho! " * 3
 puts "Ho! " * 0
 
@@ -89,7 +97,7 @@ puts "hello".end_with?("heaven", "ello") #true
 puts "hello".start_with?("hel") #true
 puts "hello".start_with?("dog","cat") #false
 
-#string =~ Regexp expression returns the index of the string where it is true. 
+#string =~ Regexp expression returns the index of the string where it is true.
 puts "a okay" =~ /okay/ #returns 2, that is where okay starts
 puts "a okay" =~ /\w+/ #returns 0 because that is where all strings start
 puts "a okay" =~ /\d/ #returns nil because there are no digits in this string
@@ -141,7 +149,7 @@ puts "   hello.   ".rstrip #right strip
 puts "   hello.   ".strip #removes trailing and leading white space
 puts "  hello I am no white spaces  ".gsub(/\s+/,'') #removes all spaces in all text
 
-#scanning a string - iterates through str, matching a pattern. For each match, 
+#scanning a string - iterates through str, matching a pattern. For each match,
 #a result is generated and either added to an array or passed to a block (if present)
 str = "a cruel world"
 puts str.scan(/\w+/).inspect
@@ -155,4 +163,3 @@ puts cnt
 cnt2 = 0
 str.scan("l") {cnt2 += 1}
 puts cnt2
-
