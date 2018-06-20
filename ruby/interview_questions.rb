@@ -165,20 +165,99 @@
 ### -----------------------------------------------------------------------------------------------------------------------
 
 ### Provide an example of RESTful routing and controller.
+#   A RESTful API is an application program interface (API) that uses HTTP requests to GET, PUT, POST and DELETE data.
+#
+#   A RESTful API -- also referred to as a RESTful web service -- is based on representational state transfer (REST)
+#   technology, an architectural style and approach to communications often used in web services development.
+#
+#   The basic premise is, instead of relying exclusively on the URL to indicate what webpage you want to go to (and just
+#   using the one method), it's a combination of VERB and URL.
+#
+#   This way, the same URL, when used with a different verb (such as GET, PUT, POST, DELETE), will get you to a different
+#   page. This makes for cleaner, shorter URLs, and is particularly adapted to CRUD applications, which most web apps are.
 
 ### Describe CRUD verbs and actions.
+#   Create
+#    - new
+#    - create
+#   Read
+#    - index
+#    - show
+#   Update
+#    - edit
+#    - update
+#   Delete
+#    - destroy
 
 ### How should you test routes?
+#   Like everything else in your Rails application, you can test your routes. Route tests reside in test/controllers/
+#   or are part of controller tests.
 
 ### How should you use filters in controllers?
+#   Filters are methods that are run "before", "after" or "around" a controller action.
 
 ### What are Strong Parameters?
+#   With strong parameters, Action Controller parameters are forbidden to be used in Active Model mass assignments until
+#   they have been whitelisted. This means that you'll have to make a conscious decision about which attributes to allow
+#   for mass update. This is a better security practice to help prevent accidentally allowing users to update sensitive
+#   model attributes.
 
 ### What do we need to test in controllers?
+#?
 
 ### How should you use content_for and yield?
+#   The content_for method allows you to insert content into a named yield block in your layout. For example,
+#   this view would work:
+#
+#   <html>
+#     <head>
+#     <%= yield :head %>
+#     </head>
+#     <body>
+#     <%= yield %>
+#     </body>
+#   </html>
+#
+#   <% content_for :head do %>
+#     <title>A simple page</title>
+#   <% end %>
+#
+#   <p>Hello, Rails!</p>
+#
+#   The content_for method is very helpful when your layout contains distinct regions such as sidebars and footers that should
+#   get their own blocks of content inserted. It's also useful for inserting tags that load page-specific JavaScript or css
+#   files into the header of an otherwise generic layout.
 
 ### How should you use nested layouts?
+#   You may find that your application requires a layout that differs slightly from your regular application layout to
+#   support one particular controller. Rather than repeating the main layout and editing it, you can accomplish this by
+#   using nested layouts (sometimes called sub-templates).
+#
+#   <html>
+#   <head>
+#     <title><%= @page_title or "Page Title" %></title>
+#     <%= stylesheet_link_tag "layout" %>
+#     <style><%= yield :stylesheets %></style>
+#   </head>
+#   <body>
+#     <div id="top_menu">Top menu items here</div>
+#     <div id="menu">Menu items here</div>
+#     <div id="content"><%= content_for?(:content) ? yield(:content) : yield %></div>
+#   </body>
+#   </html>
+#
+#   <% content_for :stylesheets do %>
+#     #top_menu {display: none}
+#     #right_menu {float: right; background-color: yellow; color: black}
+#   <% end %>
+#
+#   <% content_for :content do %>
+#     <div id="right_menu">Right menu items here</div>
+#     <%= content_for?(:news_content) ? yield(:news_content) : yield %>
+#   <% end %>
+#   <%= render template: "layouts/application" %>
+
+### -----------------------------------------------------------------------------------------------------------------------
 
 ### Explain the Active Record pattern.
 
