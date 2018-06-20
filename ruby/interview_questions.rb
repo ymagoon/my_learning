@@ -382,34 +382,71 @@
 #   SQL injection attacks is to bypass authorization. Another goal is to carry out data manipulation or reading arbitrary data.
 
 ### How should you store secure data such as a password?
-
+#   It's better to use something like OAuth, which is one-way encryption. But, if that is not an option, store them encrypted.
 
 ### Why do we need to use HTTPS instead of HTTP?
-
+#   HTTPS pages typically use one of two secure protocols to encrypt communications - SSL (Secure Sockets Layer) or
+#   TLS (Transport Layer Security). Both the TLS and SSL protocols use what is known as an 'asymmetric' Public Key
+#   Infrastructure (PKI) system. An asymmetric system uses two 'keys' to encrypt communications, a 'public' key and a
+#   'private' key. Anything encrypted with the public key can only be decrypted by the private key and vice-versa.
 
 ### What is unit testing (in classical terms)?
-
+#   Unit testing is a software development process in which the smallest testable parts of an application, called units,
+#   are individually and independently scrutinized for proper operation. Unit testing can be done manually but is often
+#   automated.
 
 ### What is the primary technique for writing a test?
-
+#   Test driven development?
 
 ### What are your favorite tools for writing unit tests?
-
+#   Rspec
 
 ### What are your favorite tools for writing feature tests?
 
 
 ### What is a code smell?
-
+#   any characteristic in the source code of a program that possibly indicates a deeper problem. Another way to look at
+#   smells is with respect to principles and quality: "Smells are certain structures in the code that indicate violation
+#   of fundamental design principles and negatively impact design quality".[3] Code smells are usually not bugs; they are not
+#   technically incorrect and do not prevent the program from functioning. Instead, they indicate weaknesses in design that
+#   may slow down development or increase the risk of bugs or failures in the future.
 
 ### What are your favorite tools to find code smells and potential bugs?
-
+#   Bullet, Breakman, Rubocop
 
 ### Why should you avoid fat controllers?
-
+#   In practice, this can require a range of different types of refactoring, but it all comes down to one idea: by moving
+#   any logic that isn’t about the response (for example, setting a flash message, or choosing whether to redirect or render
+#   a view) to the model (instead of the controller), not only have you promoted reuse where possible but you’ve also made
+#   it possible to test your code outside of the context of a request.
 
 ### Why should you avoid fat models?
-
+#   Organize code into gems and reuse it!
 
 ### Explain extract Value, Service, Form, View, Query, and Policy Objects techniques.
-
+#   https://www.sitepoint.com/7-design-patterns-to-refactor-mvc-components-in-rails/
+#
+#   Service Objects are created when an action:
+#   - is complex (such as calculating an employee’s salary)
+#   - uses APIs of external services
+#   - clearly doesn’t belong to one model (for example, deleting outdated data)
+#   - uses several models (for example, importing data from one file to several models)
+#
+#   The Value Object design pattern encourages simple, small objects (which usually just contain given values), and lets you
+#   compare these objects according to a given logic or simply based on specific attributes (and not on their identity).
+#   Examples of values objects are objects representing money values in various currencies. We could then compare these value
+#   objects using one currency (e.g. USD). Value objects could also represent temperatures and be compared using the Kelvin
+#   scale, for instance.
+#
+#   Form Object is a design pattern that encapsulates logic related to validating and persisting data.
+#
+#   Query Object is a design pattern that lets us extract query logic from Controllers and Models into reusable classes.
+#
+#   A View Object allows us to take data and calculations that are needed only for surfacing a representation of the Model
+#   in the View – such as an HTML page for a website or a JSON response from an API endpoint – out of the Controller and Model.
+#
+#   The Policy Objects design pattern is similar to Service Objects, but is responsible for read operations while Service
+#   Objects are responsible for write operations. Policy Objects encapsulate complex business rules and can easily be
+#   replaced by other Policy Objects with different rules. For example, we can check if a guest user is able to retrieve
+#   certain resources using a guest Policy Object. If the user is an admin, we can easily change this guest Policy Object
+#   to an admin Policy Object that contains admin rules.
