@@ -35,6 +35,7 @@
 #   receiver. In other words, all methods are invoked on an object. The object on which the method is called is the receiver, and the method
 #   is the message. If we call "foo".upcase, the "foo" object is the receiver and upcase is the message. If we don't specify an object
 #   (a receiver) when calling a method, it is implicitly called on the self object.
+#
 #   When inside an instance method, the self keyword refers to that specific instance.
 #   When inside a class (like a class method self.feed), the self keyword refers to the class
 
@@ -57,8 +58,8 @@
 #     puts "Hello!"
 #   end
 #
-#    Alternatively, you can define a singleton method like this:
-#    z1.define_singleton_method(:say_hello) { puts "Hello!" }
+#   Alternatively, you can define a singleton method like this:
+#   z1.define_singleton_method(:say_hello) { puts "Hello!" }
 
 ### Describe available Ruby callbacks. How can we use them in practice?
 #   TODO
@@ -99,41 +100,125 @@
 #   Handling missing arguments: When a lambda expects arguments and we don't provide them, or we provide the wrong number of arguments,
 #   an exception is thrown. When a Proc expects an argument and doesn't receive it, it runs and defaults the missing argument value to nil.
 
-
 ### What is RubyGems? How does it work?
+#   It's a package manager that provides a standard format for distributing ruby programs and libraries
+
 ### How can you build your own Ruby gem?
+#   It's as simple as creating the file structure for them gem, completing the .gemspec and wabang!
+
 ### Explain the structure of a Ruby gem.
+#   the .gemspec is in the root directory while there is a lib, spec, bin folder. All the code for the gem goes in
+#   the lib folder. There is one index file with the same name as the gem name and the rest of the gems are included
+#   in the index gem file.
+#   https://guides.rubygems.org/make-your-own-gem/
+
 ### Can you give me some examples of your favorite gems besides Ruby on Rails?
+#   nokogiri - I like scraping
+
+### -----------------------------------------------------------------------------------------------------------------------
+
 ### What is ActiveJob? When should we use it?
+#   Active Job is a framework for declaring jobs and making them run on a variety of queuing backends. These jobs can be
+#   everything from regularly scheduled clean-ups, to billing charges, to mailings. Anything that can be chopped up into
+#   small units of work and run in parallel, really.
+
 ### What is Asset Pipeline?
+#   The asset pipeline can be thought of as the tools and mechanisms by which Javascript files, stylesheets, and images are
+#   processed and prepared for use by the browser. These processes can minify and compress assets, as well as pre-process assets
+#   that are written in other languages such as Coffeescript or Sass.
+#
+#   The asset pipeline was created to solve a variety of problems related to static assets. One such issue is that each asset
+#   specified separately in the HTML markup must be retrieved separately, resulting in a higher number of HTTP requests and,
+#   in the end, a longer load time. Raw Javascript and CSS files can also waste a lot of bandwidth with comments, extra white
+#   space, and long variable names. Another issue that comes up involves caching. When you serve up a Javascript file from your
+#   server, for example, the browser will automatically cache that file for a period of time. That improves page load time, but
+#   what if that asset changes at a later point in time? The browser won’t know about it, so it will continue to use the cached
+#   asset until its cache life has expired.
+
 ### Explain the difference between Page, Action, Fragment, Low-Level, SQL caching types.
+#   Page caching has been removed in Rails 4
+#   Action caching has been removed in Rails 4
+#
+#   Dynamic web applications usually build pages with a variety of components not all of which have the same caching
+#   characteristics. When different parts of the page need to be cached and expired separately you can use Fragment Caching.
+#
+#   Fragment Caching allows a fragment of view logic to be wrapped in a cache block and served out of the cache store
+#   when the next request comes in.
+#
+#   Sometimes you need to cache a particular value or query result instead of caching view fragments. Rails' caching mechanism
+#   works great for storing any kind of information.
+#
+#   The most efficient way to implement low-level caching is using the Rails.cache.fetch method. This method does both reading
+#   and writing to the cache. When passed only a single argument, the key is fetched and value from the cache is returned. If a
+#   block is passed, that block will be executed in the event of a cache miss. The return value of the block will be written to
+#   the cache under the given cache key, and that return value will be returned. In case of cache hit, the cached value will be
+#   returned without executing the block.
+#
+#   Query caching is a Rails feature that caches the result set returned by each query. If Rails encounters the same query again
+#   for that request, it will use the cached result set as opposed to running the query against the database again.
+
 ### What is a Rails engine?
+#   Engines can be considered miniature applications that provide functionality to their host applications. A Rails application
+#   is actually just a "supercharged" engine, with the Rails::Application class inheriting a lot of its behavior from
+#   Rails::Engine.
+
+### -----------------------------------------------------------------------------------------------------------------------
+
 ### Provide an example of RESTful routing and controller.
+
 ### Describe CRUD verbs and actions.
+
 ### How should you test routes?
+
 ### How should you use filters in controllers?
+
 ### What are Strong Parameters?
+
 ### What do we need to test in controllers?
+
 ### How should you use content_for and yield?
+
 ### How should you use nested layouts?
+
 ### Explain the Active Record pattern.
+
 ### What is Object-Relational Mapping?
+
 ### Describe Active Record conventions.
+
 ### Explain the Migrations mechanism.
+
 ### Describe types of associations in Active Record.
+
 ### What is Scopes? How should you use it?
+
 ### Explain the difference between optimistic and pessimistic locking.
+
 ### Explain what is a sessions mechanism. How does it work?
+
 ### Describe cross-site request forgery, cross-site scripting, session hijacking, and session fixation attacks.
+
 ### What is the difference between SQL Injection and CSS Injection?
+
 ### How should you store secure data such as a password?
+
 ### Why do we need to use HTTPS instead of HTTP?
+
 ### What is unit testing (in classical terms)?
+
 ### What is the primary technique for writing a test?
+
 ### What are your favorite tools for writing unit tests?
+
 ### What are your favorite tools for writing feature tests?
+
 ### What is a code smell?
+
 ### What are your favorite tools to find code smells and potential bugs?
+
 ### Why should you avoid fat controllers?
+
 ### Why should you avoid fat models?
+
 ### Explain extract Value, Service, Form, View, Query, and Policy Objects techniques.
+
