@@ -260,44 +260,156 @@
 ### -----------------------------------------------------------------------------------------------------------------------
 
 ### Explain the Active Record pattern.
+#   It's an architectural pattern that stores in-memory object data in relational databases. It's an approach to
+#   access data from a database. An object instance is mapped to a single row in the table. If a new object is created, a new
+#   row is added to the table. If the object is updated then the row corresponding to the object is also updated.
 
 ### What is Object-Relational Mapping?
+#   It's a technique for converting data between incompatible type systems using object-oriented programming languages. This
+#   creates, in effect, a "virtual object database" that can be used from within the programming language.
 
 ### Describe Active Record conventions.
+#   Activerecord is built on the premise of convention over configuration.
+#
+#   By default, Active Record uses some naming conventions to find out how the mapping between models and database tables
+#   should be created. Rails will pluralize your class names to find the respective database table. So, for a class Book,
+#   you should have a database table called books. The Rails pluralization mechanisms are very powerful, being capable of
+#   pluralizing (and singularizing) both regular and irregular words. When using class names composed of two or more words,
+#   the model class name should follow the Ruby conventions, using the CamelCase form, while the table name must contain the
+#   words separated by underscores.
+#
+#   Active Record uses naming conventions for the columns in database tables, depending on the purpose of these columns.
+#   Foreign keys - These fields should be named following the pattern singularized_table_name_id (e.g., item_id, order_id).
+#   These are the fields that Active Record will look for when you create associations between your models.
+#   Primary keys - By default, Active Record will use an integer column named id as the table's primary key. When using
+#   Active Record Migrations to create your tables, this column will be automatically created.
 
 ### Explain the Migrations mechanism.
+#   Rails provides a domain specific language (DSL) for managing database schema called migrations. Migrations are stored in
+#   files which are executed against any database that Active Record supports using rake.
+#
+#   Rails keeps track of which files have been committed to the database and provides rollback features. To actually create
+#   the table, you'd run rails db:migrate and to roll it back, rails db:rollback.
 
 ### Describe types of associations in Active Record.
+#   In Rails, an association is a connection between two Active Record models. With Active Record associations, we can streamline
+#   operations by declaratively telling Rails that there is a connection between the two models.
+#
+#   Types of associations:
+#    - belongs_to
+#    - has_one
+#    - has_many
+#    - has_many :through
+#    - has_one :through
+#    - has_and_belongs_to_many
 
 ### What is Scopes? How should you use it?
+#   Scoping allows you to specify commonly-used queries which can be referenced as method calls on the association objects or
+#   models. With these scopes, you can use every method previously covered such as where, joins and includes. All scope methods
+#   will return an ActiveRecord::Relation object which will allow for further methods (such as other scopes) to be called on it.
+#
+#   scope :published, -> { where(published: true) }
+#
+#   Scopes can also take arguments
+#
+#   scope :created_before, ->(time) { where("created_at < ?", time)
 
 ### Explain the difference between optimistic and pessimistic locking.
+#   Locking is helpful for preventing race conditions when updating records in the database and ensuring atomic updates.
+#   Active Record provides two locking mechanisms:
+#    - Optimistic Locking
+#    - Pessimistic Locking
+#
+#   Optimistic locking allows multiple users to access the same record for edits, and assumes a minimum of conflicts with
+#   the data. It does this by checking whether another process has made changes to a record since it was opened. An
+#   ActiveRecord::StaleObjectError exception is thrown if that has occurred and the update is ignored.
+#
+#   Pessimistic locking uses a locking mechanism provided by the underlying database. Using lock when building a relation
+#   obtains an exclusive lock on the selected rows. Relations using lock are usually wrapped inside a transaction for preventing
+#   deadlock conditions.
 
 ### Explain what is a sessions mechanism. How does it work?
+#   Most applications need to keep track of certain state of a particular user. This could be the contents of a shopping
+#   basket or the user id of the currently logged in user. Without the idea of sessions, the user would have to identify, and
+#   probably authenticate, on every request. Rails will create a new session automatically if a new user accesses the application.
+#   It will load an existing session if the user has already used the application.
+
+#   A session usually consists of a hash of values and a session ID, usually a 32-character string, to identify the hash.
+#   Every cookie sent to the client's browser includes the session ID. And the other way round: the browser will send it
+#   to the server on every request from the client. In Rails you can save and retrieve values using the session method:
 
 ### Describe cross-site request forgery, cross-site scripting, session hijacking, and session fixation attacks.
+#   Many web applications have an authentication system: a user provides a user name and password, the web application
+#   checks them and stores the corresponding user id in the session hash. From now on, the session is valid. On every request
+#   the application will load the user, identified by the user id in the session, without the need for new authentication. The
+#   session ID in the cookie identifies the session.
+#
+#   Hence, the cookie serves as temporary authentication for the web application. Anyone who seizes a cookie from someone
+#   else, may use the web application as this user - with possibly severe consequences.
+#
+#   Apart from stealing a user's session ID, the attacker may fix a session ID known to them. This is called session fixation.
+#
+#   This attack focuses on fixing a user's session ID known to the attacker, and forcing the user's browser into using this ID.
+#
+#   It is therefore not necessary for the attacker to steal the session ID afterwards. Here is how this attack works:
+#   - The attacker creates a valid session ID: They load the login page of the web application where they want to fix the session,
+#     and take the session ID in the cookie from the response (see number 1 and 2 in the image).
+#   - They maintain the session by accessing the web application periodically in order to keep an expiring session alive.
+#   - The attacker forces the user's browser into using this session ID (see number 3 in the image). As you may not change a
+#     cookie of another domain (because of the same origin policy), the attacker has to run a JavaScript from the domain of
+#     the target web application. Injecting the JavaScript code into the application by XSS accomplishes this attack. Here is
+#     an example: <script>document.cookie="_session_id=16d5b78abb28e3d6206b60f22a03c8d9";</script>.
+#   - The attacker lures the victim to the infected page with the JavaScript code. By viewing the page, the victim's browser
+#     will change the session ID to the trap session ID.
+#   - As the new trap session is unused, the web application will require the user to authenticate.
+#   - From now on, the victim and the attacker will co-use the web application with the same session: The session became valid
+#     and the victim didn't notice the attack.
+#
+#   Cross-site request forgery (CSRF) works by including malicious code or a link in a page that accesses a web application
+#   that the user is believed to have authenticated. If the session for that web application has not timed out, an attacker
+#   may execute unauthorized commands.
+#
+#   The most widespread, and one of the most devastating security vulnerabilities in web applications is XSS. This malicious attack
+#   injects client-side executable code.
+#
+#   An attacker injects some code, the web application saves it and displays it on a page, later presented to a victim. Most
+#   XSS examples simply display an alert box, but it is more powerful than that. XSS can steal the cookie, hijack the session,
+#   redirect the victim to a fake website, display advertisements for the benefit of the attacker, change elements on the web
+#   site to get confidential information or install malicious software through security holes in the web browser.
 
 ### What is the difference between SQL Injection and CSS Injection?
+#   SQL injection attacks aim at influencing database queries by manipulating web application parameters. A popular goal of
+#   SQL injection attacks is to bypass authorization. Another goal is to carry out data manipulation or reading arbitrary data.
 
 ### How should you store secure data such as a password?
 
+
 ### Why do we need to use HTTPS instead of HTTP?
+
 
 ### What is unit testing (in classical terms)?
 
+
 ### What is the primary technique for writing a test?
+
 
 ### What are your favorite tools for writing unit tests?
 
+
 ### What are your favorite tools for writing feature tests?
+
 
 ### What is a code smell?
 
+
 ### What are your favorite tools to find code smells and potential bugs?
+
 
 ### Why should you avoid fat controllers?
 
+
 ### Why should you avoid fat models?
+
 
 ### Explain extract Value, Service, Form, View, Query, and Policy Objects techniques.
 
