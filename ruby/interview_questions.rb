@@ -1,6 +1,8 @@
+#   https://rubygarage.org/blog/solid-principles-of-ood
+
 ### What is a class?
 #   Classes are blueprints used to create a grouping of functions in a single container (object). Classes contain methods
-#   (getter or setter methods) thta allow us to read or write data to instance variables from outside the class
+#   (getter or setter methods) that allow us to read or write data to instance variables from outside the class
 
 ### What is the difference between a class and a module?
 #   A module is somewhat similar to a class, except it does not support inheritance, nor instantiating. It is mostly used as a
@@ -11,8 +13,7 @@
 #   an object is an instance of a class
 
 ### How would you declare and use a constructor in Ruby?
-#   Constants are declared in all capital letters like IM_A_CONSTANT. They are supposed to, well, remain constant
-#   but that is not enforced. Instead, the compiler just gives you a warning.
+#   Constructors are created by defining a method called initialize, which can take parameters
 
 ### How would you create getter and setter methods in Ruby?
 #   you can use the attr_accessor method followed by a symbol for the method you want to create, alternatively you can
@@ -41,7 +42,7 @@
 
 ### Explain how (almost) everything is an object in Ruby.
 #   Almost everything in ruby is an object. Numbers, strings, arrays, ranges, etc. They all inherit from the base
-#   class Object.
+#   class Object. Blocks are not objects, nor are parameters.
 
 ### Explain what singleton methods are. What is Eigenclass in Ruby?
 #   A singleton method is a method that is implemented only on a single object.
@@ -333,7 +334,7 @@
 #   basket or the user id of the currently logged in user. Without the idea of sessions, the user would have to identify, and
 #   probably authenticate, on every request. Rails will create a new session automatically if a new user accesses the application.
 #   It will load an existing session if the user has already used the application.
-
+#
 #   A session usually consists of a hash of values and a session ID, usually a 32-character string, to identify the hash.
 #   Every cookie sent to the client's browser includes the session ID. And the other way round: the browser will send it
 #   to the server on every request from the client. In Rails you can save and retrieve values using the session method:
@@ -405,7 +406,7 @@
 
 
 ### What is a code smell?
-#   any characteristic in the source code of a program that possibly indicates a deeper problem. Another way to look at
+#   Any characteristic in the source code of a program that possibly indicates a deeper problem. Another way to look at
 #   smells is with respect to principles and quality: "Smells are certain structures in the code that indicate violation
 #   of fundamental design principles and negatively impact design quality".[3] Code smells are usually not bugs; they are not
 #   technically incorrect and do not prevent the program from functioning. Instead, they indicate weaknesses in design that
