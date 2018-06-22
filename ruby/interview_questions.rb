@@ -1,3 +1,5 @@
+#### General ---------------------------------------------------------------------------------------------------------------
+
 ### Describe the MVC model
 #   The MVC model is architecture used in software development that breaks up a program into three distinct parts: the model,
 #   the view, and the controller.
@@ -8,6 +10,7 @@
 
 ### Describe SOLID
 #   https://rubygarage.org/blog/solid-principles-of-ood
+#
 #   In OOP, SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and
 #   maintainable.
 #
@@ -41,6 +44,18 @@
 #   depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.” The DIP
 #   principle is simply the result of strictly following two other SOLID principles: Liskov substitution and open-closed.
 
+### Describe DRY
+#   Don't Repeat Yourself (DRY) is a principle of software development aimed at reducing repetition of software patterns,
+#   replacing it with abstractions, or repetition of the same data, using data normalization to avoid redundancy. The DRY
+#   principle is stated as "Every piece of knowledge must have a single, unambiguous, authoritative representation within a
+#   system".
+#
+#   When the DRY principle is applied successfully, a modification of any single element of a system does not require a change
+#   in other logically unrelated elements. Additionally, elements that are logically related all change predictably and uniformly,
+#   and are thus kept in sync.
+
+#### Object Oriented ----------------------------------------------------------------------------------------------------
+
 ### What is a class?
 #   Classes are blueprints used to create a grouping of functions in a single container (object). Classes contain methods
 #   (getter or setter methods) that allow us to read or write data to instance variables from outside the class
@@ -52,6 +67,40 @@
 
 ### What is an object?
 #   an object is an instance of a class
+
+### Describe inheritance
+#    A class that inherits from another class is called a subclass (child class). The class that is inherited (where the inherited
+#    components are implemented) is called superclass or parent class.
+#
+#    Usually, the superclass (parent) is more general and its subclasses (children) add further specialization. For instance, a
+#    class called Car may specify that cars have 4 wheels, a steering wheel and so on. This class may inherit from a class called
+#    Vehicle that implements the details of combustion engines and will also be inherited by the Motorcycle class.
+#
+#    Each class can only inherit from one other class.
+#
+#   Some built-in classes are Array, Bignum, Class, Dir, Exception, File, Fixnum, Float, Integer, IO, Module, Numeric, Object,
+#   Range, String, Thread, Time. Some built-in modules are Comparable, Enumerable, GC, Kernel, Math. The BasicObject class is
+#   the parent class of all classes in Ruby. Its methods are therefore available to all objects unless explicitly overridden.
+
+### Describe Polymorphism
+#   https://robots.thoughtbot.com/back-to-basics-polymorphism-and-ruby
+#   At its core, in Ruby, polymorphism means being able to send the same message to different objects and get different results.
+#
+#   Polymorphism can be achieved through inheritance by creating a parent class with a method (parse) and with two child classes,
+#   both overriding the parent classes method (parse). The code will behave differently depending on which child class receives
+#   the (parse) method.
+#
+#   Polymorphism in Ruby can also be achieved with Duck Typing. Duck typing allows us to create two classes with the same method
+#   and a third, more generic class (without inheritance). In the generic class, we can take an argument and call the method (parse)
+#   on the argument. By passing in an instance of one of our classes, the generic method calls (parse) on it.
+#
+#   Polymorphism can also be achieved by using design patterns.
+
+### Describe abstract classes
+#
+
+### Describe Encapsulation
+#
 
 ### How would you declare and use a constructor in Ruby?
 #   Constructors are created by defining a method called initialize, which can take parameters
