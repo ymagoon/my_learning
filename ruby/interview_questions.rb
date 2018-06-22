@@ -1,4 +1,45 @@
+### Describe the MVC model
+#   The MVC model is architecture used in software development that breaks up a program into three distinct parts: the model,
+#   the view, and the controller.
+#
+#   Model: Maintains the data of the application and the business logic. The model interacts with the database.
+#   View: User interface, or the GUI. Displays data from model to the user.
+#   Controller: Handles the users' request. Interacts with the database based on the request from the user and renders the view.
+
+### Describe SOLID
 #   https://rubygarage.org/blog/solid-principles-of-ood
+#   In OOP, SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and
+#   maintainable.
+#
+#   S - Single Responsibility
+#   O - Open-Closed Principle
+#   L - Liskov Substitution Principle
+#   I - Interface Segregation Principle
+#   D - Dependency Inversion Principle
+#
+##  The Single Responsibility Principle (SRP) is the following: “A class should have a single responsibility.” In other words,
+#   any complicated classes should be divided into smaller classes that are each responsible for a particular behaviour, making
+#   it easier to understand and maintain your codebase. The goal of the SRP principle is to fight complexity that creeps in while
+#   you’re developing an application’s logic.
+#
+##  The Open-Closed Principle (OCP) states that “Modules, classes, methods and other application entities should be open for
+#   extension but closed for modification.” Put simply, all modules, classes, methods, etc. should be designed in a modular way
+#   so that you (or other developers) are able to change the behavior of the system without changing the source code. The
+#   open–closed principle helps developers achieve a flexible system architecture.
+#
+##  Liskov Substitution Principle (LSP) states that “Subclasses should add to a base class’s behaviour, not replace it.” In a
+#   more informal interpretation, the principle states that parent instances should be replaceable with one of their child
+#   instances without creating any unexpected or incorrect behaviour. Therefore, LSP ensures that abstractions are correct,
+#   and helps developers achieve more reusable code and better organize class hierarchies.
+#
+##  The Interface Segregation Principle (ISP) states “Clients shouldn’t depend on methods they don’t use. Several client-specific
+#   interfaces are better than one generalized interface.” Simply put, main classes should be segregated into smaller specific classes,
+#   so their clients use only methods they need. As a result, we get the interfaces segregated according to their purpose, so we
+#   avoid “fat” classes and code that’s hard to maintain.
+#
+##  The Dependency Inversion Principle (DIP) states “High-level modules shouldn’t depend on low-level modules. Both modules should
+#   depend on abstractions. In addition, abstractions shouldn’t depend on details. Details depend on abstractions.” The DIP
+#   principle is simply the result of strictly following two other SOLID principles: Liskov substitution and open-closed.
 
 ### What is a class?
 #   Classes are blueprints used to create a grouping of functions in a single container (object). Classes contain methods
