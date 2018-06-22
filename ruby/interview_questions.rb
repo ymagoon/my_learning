@@ -95,11 +95,15 @@
 #   on the argument. By passing in an instance of one of our classes, the generic method calls (parse) on it.
 #
 #   Polymorphism can also be achieved by using design patterns.
-
-### Describe abstract classes
 #
+#   Using polymorphism correctly can simplify code as well as ensure our code satifies SRP from SOLID.
 
 ### Describe Encapsulation
+#   Encapsulation means that the internal representation of an object is hidden from the outside. Only the object can interact
+#   with its internal data. By only exposing the components necessary for interacting with it, we can change methods to suit our
+#   needs without having to make the change everywhere.
+
+### Describe abstract classes
 #
 
 ### How would you declare and use a constructor in Ruby?
