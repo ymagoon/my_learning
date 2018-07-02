@@ -69,14 +69,14 @@
 #   an object is an instance of a class
 
 ### Describe inheritance
-#    A class that inherits from another class is called a subclass (child class). The class that is inherited (where the inherited
-#    components are implemented) is called superclass or parent class.
+#   A class that inherits from another class is called a subclass (child class). The class that is inherited (where the inherited
+#   components are implemented) is called superclass or parent class.
 #
-#    Usually, the superclass (parent) is more general and its subclasses (children) add further specialization. For instance, a
-#    class called Car may specify that cars have 4 wheels, a steering wheel and so on. This class may inherit from a class called
-#    Vehicle that implements the details of combustion engines and will also be inherited by the Motorcycle class.
+#   Usually, the superclass (parent) is more general and its subclasses (children) add further specialization. For instance, a
+#   class called Car may specify that cars have 4 wheels, a steering wheel and so on. This class may inherit from a class called
+#   Vehicle that implements the details of combustion engines and will also be inherited by the Motorcycle class.
 #
-#    Each class can only inherit from one other class.
+#   Each class can only inherit from one other class.
 #
 #   Some built-in classes are Array, Bignum, Class, Dir, Exception, File, Fixnum, Float, Integer, IO, Module, Numeric, Object,
 #   Range, String, Thread, Time. Some built-in modules are Comparable, Enumerable, GC, Kernel, Math. The BasicObject class is
